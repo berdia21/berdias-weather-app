@@ -1,0 +1,16 @@
+@import '../../styles/abstracts/variables';
+
+.info-board {
+  background-color: rgba($color-blue-light, 0.5);
+  padding: 15px;
+  border: 2px solid $color-blue-light;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  text-align: left;
+
+  svg {
+    margin-right: 8px;
+    margin-bottom: -1px;
+  }
+}

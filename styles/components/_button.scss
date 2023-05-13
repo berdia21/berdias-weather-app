@@ -1,0 +1,22 @@
+.btn {
+  padding: 7px 26px;
+  border-radius: 8px;
+  background-color: $color-blue-light;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  color: #fff;
+  font-size: 18px;
+  min-height: 45px;
+  border: none;
+  transition: $transition-primary;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: darken($color-blue-light, 10%);
+  }
+}

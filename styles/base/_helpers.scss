@@ -1,0 +1,69 @@
+.text-center {
+  text-align: center;
+}
+
+.loading {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:before {
+    content: '';
+    width: 70px;
+    height: 70px;
+    border: 4px dashed #fff;
+    filter: drop-shadow(0px 0px 6px #fff);
+    display: block;
+    border-radius: 50px;
+    animation: roteteAnim 2s linear infinite;
+  }
+
+  @keyframes roteteAnim {
+
+    0% {
+      transform: rotate(0deg);
+      border-color: red;
+    }
+
+    14% {
+      border-color: orange;
+    }
+
+    28% {
+      border-color: yellow;
+    }
+
+    42% {
+      border-color: green;
+    }
+
+    57% {
+      border-color: blue;
+    }
+
+    71% {
+      border-color: indigo;
+    }
+
+    85% {
+      border-color: violet;
+    }
+
+    100% {
+      transform: rotate(360deg);
+      border-color: red;
+    }
+  }
+}
+
+.error {
+  padding: 15px;
+  border: 1px solid #f00;
+  color: #fff;
+  background-color: rgba(#f00, 0.3);
+  width: 100%;
+  border-radius: 8px;
+  text-align: center;
+}

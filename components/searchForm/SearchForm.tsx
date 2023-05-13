@@ -12,6 +12,7 @@ export function SearchForm({ onFormSubmit }: Props) {
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (location.length > 1) {
+      console.log("loc in form", location);
       onFormSubmit(location);
       setLocation("");
     }

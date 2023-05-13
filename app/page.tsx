@@ -14,7 +14,6 @@ import useWeatherBackground from "@/hooks/useWeatherBackground";
 import { useAppSelector } from "@/redux/hooks";
 
 export default function Home() {
-  const [location, setLocation] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const selectedUnit = useAppSelector((state) => state.weatherReducer.units);
   const weatherData = useSelector((state: RootState) => state.weatherReducer);
@@ -29,26 +28,16 @@ export default function Home() {
     (state: RootState) => state.weatherReducer.isError
   );
 
-  function fetchWeatherData() {
-    try {
-      dispatch(
-        fetchWeatherByLocationName({ city: location, units: selectedUnit })
-      );
-    } catch (error) {
-      setLocation("");
-    }
+  function fetchWeatherData(city: string) {
+    dispatch(fetchWeatherByLocationName({ city: city, units: selectedUnit }));
   }
 
   function handleFormSubmit(location: string) {
-    setLocation(location);
-    dispatch(setLoadingState(true));
-  }
-
-  useEffect(() => {
     if (location.length) {
-      fetchWeatherData();
+      dispatch(setLoadingState(true));
+      fetchWeatherData(location);
     }
-  }, [location]);
+  }
 
   return (
     <main
@@ -67,9 +56,7 @@ export default function Home() {
 
         {isLoading && <div className="loading"></div>}
         {isError && !isLoading && (
-          <p className="text-center error">
-            Location with name: "{location}" was not found 😕
-          </p>
+          <p className="text-center error">Location was not found 😕</p>
         )}
 
         {weatherData?.name && !isLoading && !isError ? (

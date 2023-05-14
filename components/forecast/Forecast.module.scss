@@ -23,6 +23,7 @@
     font-size: 60px;
     margin-bottom: 20px;
     position: relative;
+    padding-right: 70px;
 
     sup {
       font-size: 34px;
@@ -31,7 +32,7 @@
 
   &__unit-switcher {
     position: absolute;
-    right: -70px;
+    right: 0px;
     display: flex;
     padding: 5px 7px;
     top: 0;
@@ -85,6 +86,7 @@
 
     img {
       flex-shrink: 0;
+      filter: drop-shadow(0px 0px 10px rgba(#fff, 0.7));
     }
 
     &__in {

@@ -115,7 +115,7 @@ export const fetchWeatherByGeolocation = createAsyncThunk(
 
 const updateWeatherState = (
   state: WeatherState,
-  action: PayloadAction<any>
+  action: PayloadAction<WeatherState>
 ) => {
   state.coord = action.payload.coord;
   state.weather = action.payload.weather;

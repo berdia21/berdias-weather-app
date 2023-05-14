@@ -4,11 +4,9 @@ import {
 } from "@/redux/features/weather";
 import styles from "./Forecast.module.scss";
 import Image from "next/image";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { useAppSelector } from "@/redux/hooks";
-
 interface Props {
   weatherData: WeatherState;
 }

@@ -1,7 +1,6 @@
 "use client";
 import { SearchForm } from "@/components/searchForm/SearchForm";
 import styles from "./Home.module.scss";
-import { useEffect, useState } from "react";
 import { UserLocation } from "@/components/userLocation/UserLocation";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,6 +11,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { Forecast } from "@/components/forecast/Forecast";
 import useWeatherBackground from "@/hooks/useWeatherBackground";
 import { useAppSelector } from "@/redux/hooks";
+import { Status } from "@/components/status";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,9 +54,8 @@ export default function Home() {
 
         <SearchForm onFormSubmit={handleFormSubmit} />
 
-        {isLoading && <div className="loading"></div>}
-        {isError && !isLoading && (
-          <p className="text-center error">Location was not found 😕</p>
+        {(isLoading || isError) && (
+          <Status isLoading={isLoading} isError={isError} />
         )}
 
         {weatherData?.name && !isLoading && !isError ? (

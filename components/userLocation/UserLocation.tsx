@@ -14,7 +14,6 @@ interface Props {
 export function UserLocation({ isWeatherDataVisible, isLoading }: Props) {
   const [hasGeolocationAccess, setHasGeolocationAccess] =
     useState<boolean>(true);
-
   const dispatch = useDispatch<AppDispatch>();
 
   function checkGeolocationPermission() {
@@ -27,7 +26,6 @@ export function UserLocation({ isWeatherDataVisible, isLoading }: Props) {
       }
 
       result.onchange = () => {
-        // check for google chrome & firefox permissions
         if (result.state === "denied" || result.state === "prompt") {
           setHasGeolocationAccess(false);
         } else {
@@ -37,52 +35,49 @@ export function UserLocation({ isWeatherDataVisible, isLoading }: Props) {
     });
   }
 
-  const handleGetLocation = () => {
-    if (navigator.geolocation && !isWeatherDataVisible) {
-      navigator.geolocation.getCurrentPosition(success, error);
-      checkGeolocationPermission();
-    }
-  };
-
   useEffect(() => {
     handleGetLocation();
   }, []);
 
-  function success(position: any) {
+  function handleGetLocation() {
+    if (navigator.geolocation && !isWeatherDataVisible) {
+      navigator.geolocation.getCurrentPosition(success, error);
+      checkGeolocationPermission();
+    }
+  }
+
+  const success = (position: GeolocationPosition) => {
     if (isWeatherDataVisible) return;
     try {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
+      const latitude = position?.coords.latitude.toString();
+      const longitude = position?.coords.longitude.toString();
       dispatch(fetchWeatherByGeolocation({ latitude, longitude }));
       dispatch(setLoadingState(true));
       setHasGeolocationAccess(true);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
-  }
+  };
 
   function error() {
     dispatch(setLoadingState(false));
   }
 
+  if (isLoading || isWeatherDataVisible) return null;
+
   return (
-    <>
-      {!isLoading && !isWeatherDataVisible && (
-        <div className="text-center">
-          {hasGeolocationAccess ? (
-            <button className="btn" onClick={handleGetLocation}>
-              Get my location forecast
-            </button>
-          ) : null}
-          {!hasGeolocationAccess ? (
-            <div className={styles["info-board"]}>
-              <BsInfoCircle />
-              Please allow us to access your browsers geo-location, to get
-              forecast for you, or enter location name in the search field
-            </div>
-          ) : null}
+    <div className="text-center">
+      {hasGeolocationAccess ? (
+        <button className="btn" onClick={handleGetLocation}>
+          Get my location forecast
+        </button>
+      ) : (
+        <div className={styles["info-board"]}>
+          <BsInfoCircle />
+          Please allow us to access your browsers geo-location, to get forecast
+          for you, or enter location name in the search field
         </div>
       )}
-    </>
+    </div>
   );
 }

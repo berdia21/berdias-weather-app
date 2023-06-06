@@ -29,7 +29,7 @@ export function SearchForm({ onFormSubmit }: Props) {
           id="location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          placeholder="District...City...Country...State..."
+          placeholder="District...City...State...Country..."
         />
         <button type="submit">
           <FaSearch size="20px" color="#555" />

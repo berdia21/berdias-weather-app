@@ -3,7 +3,7 @@ import { Providers } from "@/redux/provider";
 
 export const metadata = {
   title: "Weather App",
-  description: "Berdias weather app for TNET",
+  description: "Berdias weather app with nexy js 13",
 };
 
 export default function RootLayout({
